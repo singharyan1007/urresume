@@ -14,10 +14,10 @@ const Navbar = () => {
               </div>
               <div className=' overflow-hidden'>   
               <ul className='flex text-lg capitalise text-cyan-500  tracking-wide pl-2 pr-4 transition ease-linear duration-300'>
-                  <li className=''>
+                  <li className='px-2 hover:scale-110 transition duration-300 linear  hover:text-blue-900 '>
                       <Link to='/'>Home</Link>
                   </li>
-                  <li>
+                  <li className='px-2 hover:scale-110 transition duration-300 linear  hover:text-blue-900 '>
                       <Link to='/about'>About</Link>
                   </li>
               </ul>
