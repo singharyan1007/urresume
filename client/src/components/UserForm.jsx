@@ -1,78 +1,100 @@
-import React from 'react'
-import { useState } from 'react';
-import PersonalDetails from './PersonalDetails';
-import Experience from './Experience';
-import Project from './Project';
-import Education from './Education';
-import Success from './Success';
-import Extras from './Extras';
-
+import React from "react";
+import PersonalDetails from "./PersonalDetails";
+import Experience from "./Experience";
+import Project from "./Project";
+import Education from "./Education";
+import Success from "./Success";
+import Extras from "./Extras";
+import { useGlobalContext } from "./GlobalContext";
 const UserForm = () => {
-  const [step, setStep] = useState(1);
-  const [status, setStatus] = useState(0);
-  const [state,setState]=useState({name: '',
-        email: '',
-        phone: '',
-        linkedin: '',
-        github: '',
-        skills: '',
+  const { state, step, status, setState, setStatus, setStep,prevStep,nextStep,submitted,handleChange } = useGlobalContext();
+  switch (step) {
+    case 1:
+      return (
+        <div className="App pt-5 mt-5">
+          <div className="container col-lg-8 mx-auto text-center">
+            <PersonalDetails
+              values={state}
+              nextStep={nextStep}
+              handleChange={handleChange}
+            />
+          </div>
+          <br />
+        </div>
+      );
+    case 2:
+      return (
+        <div className="pt-5 mt-5">
+          <div className="col-lg-8 mx-auto text-center">
+            <Experience
+              values={state}
+              prevStep={prevStep}
+              /*submitted={this.submitted}*/
+              nextStep={nextStep}
+              handleChange={handleChange}
+            />
+          </div>
+          <br />
+        </div>
+      );
+    case 3:
+      return (
+        <div className="App pt-5 mt-5">
+          <div className="container col-lg-8 mx-auto text-center">
+            <Project
+              values={state}
+              prevStep={prevStep}
+              /*submitted={this.submitted}*/
+              nextStep={nextStep}
+              handleChange={handleChange}
+            />
+          </div>
+          <br />
+        </div>
+      );
+    case 4:
+      return (
+        <div className="App pt-5 mt-5">
+          <div className="container col-lg-8 mx-auto text-center">
+            <Education
+              values={state}
+              prevStep={prevStep}
+              /*submitted={this.submitted}*/
+              nextStep={nextStep}
+              handleChange={handleChange}
+            />
+          </div>
+          <br />
+        </div>
+      );
+    case 5:
+      return (
+        <div className="App pt-5 mt-5">
+          <div className="container col-lg-8 mx-auto text-center">
+            <Extras
+              values={state}
+              prevStep={prevStep}
+              nextStep={nextStep}
+              submitted={submitted}
+              handleChange={handleChange}
+            />
+          </div>
+          <br />
+        </div>
+      );
+    case 6:
+      return (
+        <div className="App pt-5 mt-5">
+          <div className="container col-lg-8 mx-auto text-center">
+            <Success />
+          </div>
+          <br />
+        </div>
+      );
 
-        exp1_org: '',
-        exp1_pos: '',
-        exp1_desc: '',
-        exp1_dur: '',
-
-        exp2_org: '',
-        exp2_pos: '',
-        exp2_desc: '',
-        exp2_dur: '',
-
-        proj1_title: '',
-        proj1_link: '',
-        proj1_desc: '',
-
-        proj2_title: '',
-        proj2_link: '',
-        proj2_desc: '',
-
-        edu1_school: '',
-        edu1_year: '',
-        edu1_qualification: '',
-        edu1_desc: '',
-
-        edu2_school: '',
-        edu2_year: '',
-        edu2_qualification: '',
-        edu2_desc: '',
-
-        extra_1: '',
-        extra_2: '',
-        extra_3: '',
-        extra_4: '',
-        extra_5: ''
-  })
-  const nextStep = () => {
-    setStep(step + 1);
-  };
-  const prevStep = () => {
-    setStep(step - 1);
-  };
-  const submitted = () => {
-    setStatus(status + 1);
-  };
-  const handleChange=(e)=>{
-    const name = e.target.name;
-    const value = e.target.value;
-    setState({ ...state, [name]: value });
+    default:
+      break;
   }
+};
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-  }
-  return (
-    <div>UserForm</div>
-  )
-}
-
-export default UserForm
+export default UserForm;
